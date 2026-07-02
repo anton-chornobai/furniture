@@ -1,0 +1,10 @@
+server:
+  name: Furniture Shop
+  port: 8080
+db:
+  host: postgres
+  port: 5432
+  user: furniture_user
+  password: 12358
+  name: furniture_db
+  ssl_mode: disable

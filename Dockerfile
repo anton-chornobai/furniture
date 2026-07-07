@@ -16,6 +16,7 @@ WORKDIR /app
 
 COPY --from=builder /app/main .
 COPY config.yaml .
+COPY static ./static
 
 EXPOSE 8443
 

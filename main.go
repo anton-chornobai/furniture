@@ -28,8 +28,11 @@ func main() {
 
 
 	http.Handle("/", my_middleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("IM func")
-	})) )
+		fmt.Println("Serving HTML file")
+		http.ServeFile(w, r, "static/index.html")
+		fmt.Println("Served HTML file")
+
+	})))
 
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatalf("server went down %v", err)

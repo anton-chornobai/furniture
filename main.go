@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
-	"github.com/joho/godotenv"
 	"github.com/furniture/config"
 	"github.com/furniture/db"
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -29,12 +30,12 @@ func main() {
 
 	http.Handle("/", my_middleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Serving HTML file")
-		http.ServeFile(w, r, "static/index.html")
-		fmt.Println("Served HTML file")
-
+		w.Write([]byte("HELLO WORLD"))
+		w.WriteHeader(http.StatusAccepted)
 	})))
+	
 
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	if err := http.ListenAndServe(":" + strconv.Itoa(cfg.Server.Port), nil); err != nil {
 		log.Fatalf("server went down %v", err)
 	}
 }
